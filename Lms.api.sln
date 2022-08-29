@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32819.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lms.api", "Lms.api\Lms.api.csproj", "{69A40C63-3297-4A01-B05A-7F87E4878CD3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lms.Core", "Lms.Core\Lms.Core.csproj", "{DDB315BE-6FB0-45C9-BF38-1DE9F9B7D64F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lms.Data", "Lms.Data\Lms.Data.csproj", "{B0263AB6-A988-4588-817F-9762E0007DCA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{69A40C63-3297-4A01-B05A-7F87E4878CD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69A40C63-3297-4A01-B05A-7F87E4878CD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69A40C63-3297-4A01-B05A-7F87E4878CD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69A40C63-3297-4A01-B05A-7F87E4878CD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDB315BE-6FB0-45C9-BF38-1DE9F9B7D64F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDB315BE-6FB0-45C9-BF38-1DE9F9B7D64F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDB315BE-6FB0-45C9-BF38-1DE9F9B7D64F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDB315BE-6FB0-45C9-BF38-1DE9F9B7D64F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0263AB6-A988-4588-817F-9762E0007DCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0263AB6-A988-4588-817F-9762E0007DCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0263AB6-A988-4588-817F-9762E0007DCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0263AB6-A988-4588-817F-9762E0007DCA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8734FCBC-1147-4931-8728-50F498B43E72}
+	EndGlobalSection
+EndGlobal
