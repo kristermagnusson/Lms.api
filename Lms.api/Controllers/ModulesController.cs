@@ -10,7 +10,9 @@ using Lms.Data.Data;
 
 namespace Lms.api.Controllers
 {
-    [Route("api/[controller]")]
+     [Route("api/[controller]")]
+   
+
     [ApiController]
     public class ModulesController : ControllerBase
     {
