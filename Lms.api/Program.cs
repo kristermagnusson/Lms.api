@@ -1,5 +1,7 @@
 using Lms.api.Extensions;
+using Lms.Core.Repositories;
 using Lms.Data.Data;
+using Lms.Data.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,7 +17,7 @@ builder.Services.AddControllers(opt=>opt.ReturnHttpNotAcceptable=true)
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddScoped<IUoW, UoW>();
 var app = builder.Build();
 
 app.SeedDataAsynk().GetAwaiter().GetResult();

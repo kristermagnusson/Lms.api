@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace Lms.Data.Data.Repositories
 {
-    public class ModulesRepository : IModuleRepository
+    public class ModuleRepository : IModuleRepository
     {
         private readonly LmsapiContext db = null!;
-        public ModulesRepository(LmsapiContext db)
+        public ModuleRepository(LmsapiContext db)
         {
             this.db = db ?? throw new ArgumentNullException(nameof(db));
         }
