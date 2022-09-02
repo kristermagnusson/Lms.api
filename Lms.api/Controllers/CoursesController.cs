@@ -30,13 +30,13 @@ namespace Lms.api.Controllers
         public async Task<ActionResult<IEnumerable<Course>>> GetCourse()
         {
             //if (_context.Course == null)
-            if (uow.CourseRepository == null)
-            {
-                return NotFound();
-            }
+            //if (uow.CourseRepository == null)
+            //{
+            //    return NotFound();
+            //}
             //return await _context.Course.ToListAsync();
             var course = await uow.CourseRepository.GetAllCourses();
-            return course;
+            return Ok (course);
 
         }
 
@@ -45,12 +45,12 @@ namespace Lms.api.Controllers
         public async Task<ActionResult<Course>> GetCourse(int id)
         {
             //if (_context.Course == null)
-            if (uow.CourseRepository == null)
+           
             {
               return NotFound();
           }
             //var course = await _context.Course.FindAsync(id);
-            var course = GetCourse(id);
+            var course = uow.CourseRepository.GetCourse(id);
             if (course == null)
             {
                 return NotFound();
@@ -70,7 +70,7 @@ namespace Lms.api.Controllers
             }
 
             //_context.Entry(course).State = EntityState.Modified;
-            uow.CourseRepository.Remove(course);
+            uow.CourseRepository.Update(course);
 
             try
             {
@@ -79,7 +79,7 @@ namespace Lms.api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CourseExists(id))
+                if (! await CourseExists(id))
                 {
                     return NotFound();
                 }
@@ -132,9 +132,9 @@ namespace Lms.api.Controllers
             return NoContent();
         }
 
-        private bool CourseExists(int id)
+        private async Task<bool> CourseExists(int id)
         {
-            return uow.CourseRepository.AnyAsync(id);
+            return await uow.CourseRepository.AnyAsync(id);
             //return (_context.Course?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
