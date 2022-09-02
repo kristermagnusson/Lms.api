@@ -11,6 +11,7 @@ using Lms.Data.Data.Repositories;
 using Lms.Core.Repositories;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using AutoMapper;
+using Lms.Core.Dto;
 
 namespace Lms.api.Controllers
 {
@@ -18,12 +19,14 @@ namespace Lms.api.Controllers
     [ApiController]
     public class CoursesController : ControllerBase
     {
-       // private readonly LmsapiContext _context;
+        // private readonly LmsapiContext _context;
+        private readonly IMapper mapper;
         private readonly IUnitOfWork uow;
         public CoursesController(/*LmsapiContext context*/ IUnitOfWork uow, IMapper mapper)
         {
            // _context = context;
             this.uow = uow;
+            this.mapper = mapper;
         }
 
         // GET: api/Courses
@@ -36,8 +39,9 @@ namespace Lms.api.Controllers
             //    return NotFound();
             //}
             //return await _context.Course.ToListAsync();
-            var course = await uow.CourseRepository.GetAllCourses();
-            return Ok (course);
+            var course =  await uow.CourseRepository.GetAllCourses();
+            var courseDto=mapper.Map<IEnumerable<CourseDto>>(course);
+            return Ok (courseDto);
 
         }
 
