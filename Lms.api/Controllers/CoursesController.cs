@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Lms.Core.Entities;
 using Lms.Data.Data;
+using Lms.Data.Data.Repositories;
+using Lms.Core.Repositories;
+using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace Lms.api.Controllers
 {
@@ -14,40 +17,46 @@ namespace Lms.api.Controllers
     [ApiController]
     public class CoursesController : ControllerBase
     {
-        private readonly LmsapiContext _context;
-
-        public CoursesController(LmsapiContext context)
+       // private readonly LmsapiContext _context;
+        private readonly IUnitOfWork uow;
+        public CoursesController(/*LmsapiContext context*/ IUnitOfWork uow)
         {
-            _context = context;
+           // _context = context;
+            this.uow = uow;
         }
 
         // GET: api/Courses
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Course>>> GetCourse()
         {
-          if (_context.Course == null)
-          {
-              return NotFound();
-          }
-            return await _context.Course.ToListAsync();
+            //if (_context.Course == null)
+            if (uow.CourseRepository == null)
+            {
+                return NotFound();
+            }
+            //return await _context.Course.ToListAsync();
+            var course = await uow.CourseRepository.GetAllCourses();
+            return course;
+
         }
 
         // GET: api/Courses/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Course>> GetCourse(int id)
         {
-          if (_context.Course == null)
-          {
+            //if (_context.Course == null)
+            if (uow.CourseRepository == null)
+            {
               return NotFound();
           }
-            var course = await _context.Course.FindAsync(id);
-
+            //var course = await _context.Course.FindAsync(id);
+            var course = GetCourse(id);
             if (course == null)
             {
                 return NotFound();
             }
 
-            return course;
+            return await course;
         }
 
         // PUT: api/Courses/5
@@ -60,11 +69,13 @@ namespace Lms.api.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(course).State = EntityState.Modified;
+            //_context.Entry(course).State = EntityState.Modified;
+            uow.CourseRepository.Remove(course);
 
             try
             {
-                await _context.SaveChangesAsync();
+               // await _context.SaveChangesAsync();
+                await uow.CompleteAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -86,13 +97,15 @@ namespace Lms.api.Controllers
         [HttpPost]
         public async Task<ActionResult<Course>> PostCourse(Course course)
         {
-          if (_context.Course == null)
-          {
+            //if (_context.Course == null)
+            if (uow.CourseRepository == null)
+            {
               return Problem("Entity set 'LmsapiContext.Course'  is null.");
           }
-            _context.Course.Add(course);
-            await _context.SaveChangesAsync();
-
+            //_context.Course.Add(course);
+            uow.CourseRepository.Add(course);
+            //await _context.SaveChangesAsync();
+            await uow.CompleteAsync();
             return CreatedAtAction("GetCourse", new { id = course.Id }, course);
         }
 
@@ -100,25 +113,30 @@ namespace Lms.api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCourse(int id)
         {
-            if (_context.Course == null)
+            //if (_context.Course == null)
+            if(uow.CourseRepository == null)
             {
                 return NotFound();
             }
-            var course = await _context.Course.FindAsync(id);
+            //var course = await _context.Course.FindAsync(id);
+            var course = await uow.CourseRepository.GetCourse(id);
             if (course == null)
             {
                 return NotFound();
             }
 
-            _context.Course.Remove(course);
-            await _context.SaveChangesAsync();
-
+            //_context.Course.Remove(course);
+            uow.CourseRepository.Remove(course);
+            //await _context.SaveChangesAsync();
+           await uow.CompleteAsync();
             return NoContent();
         }
 
         private bool CourseExists(int id)
         {
-            return (_context.Course?.Any(e => e.Id == id)).GetValueOrDefault();
+            return uow.CourseRepository.AnyAsync(id);
+            //return (_context.Course?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
     }
 }

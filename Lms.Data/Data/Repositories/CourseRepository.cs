@@ -24,7 +24,7 @@ namespace Lms.Data.Data.Repositories
 
         public async Task<bool> AnyAsync(int? id)
         {
-            return (db.Course?.Any(e => e.Id == id)).GetValueOrDefault();
+            return  (db.Course?.Any(e => e.Id == id)).GetValueOrDefault();
            
         }
 
@@ -44,7 +44,7 @@ namespace Lms.Data.Data.Repositories
            return await db.Course.FindAsync(id);
         }
 
-        public void Remove(Course course)
+        public  void Remove(Course course)
         {
             db.Course.Remove(course);
         }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Lms.Data.Data.Repositories
 {
-    public class UoW : IUoW
+    public class UnitOfWork : IUnitOfWork
     {
 
         private readonly LmsapiContext  db;
@@ -17,7 +17,7 @@ namespace Lms.Data.Data.Repositories
 
         public IModuleRepository ModuleRepository { get; }
 
-         public UoW(LmsapiContext db)
+         public UnitOfWork(LmsapiContext db)
         {
             this.db = db;
             CourseRepository = new CourseRepository(db);
