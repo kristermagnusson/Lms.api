@@ -24,8 +24,7 @@ namespace Lms.Data.Data.Repositories
 
         public async Task<bool> AnyAsync(int? id)
         {
-            return  (db.Course?.Any(e => e.Id == id)).GetValueOrDefault();
-           
+            return  (db.Course?.Any(e => e.Id == id)).GetValueOrDefault();           
         }
 
         public Task<Course> FindAsync(int? id)
@@ -36,7 +35,6 @@ namespace Lms.Data.Data.Repositories
         public async Task<IEnumerable<Course>> GetAllCourses()
         {
             return await db.Course.ToListAsync();
-
         }
 
         public async Task<Course?> GetCourse(int? id)

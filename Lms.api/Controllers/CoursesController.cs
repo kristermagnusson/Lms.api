@@ -46,9 +46,9 @@ namespace Lms.api.Controllers
         {
             //if (_context.Course == null)
            
-            {
-              return NotFound();
-          }
+            
+             // return NotFound();
+          
             //var course = await _context.Course.FindAsync(id);
             var course = uow.CourseRepository.GetCourse(id);
             if (course == null)
