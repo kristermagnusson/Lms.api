@@ -59,8 +59,8 @@ namespace Lms.api.Controllers
             {
                 return NotFound();
             }
-
-            return @module;
+            var moduleDto = mapper.Map<ModuleDto>(@module);
+            return Ok (moduleDto);
         }
 
         // PUT: api/Modules/5

@@ -10,6 +10,6 @@ namespace Lms.Core.Dto
     {
         public string Title { get; set; }
         public DateTime StartDate { get; set; }
-        public DateTime EndDate { set { StartDate.AddMonths(1); } }
+        public DateTime EndDate  => StartDate.AddMonths(1);
     }
 }

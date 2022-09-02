@@ -55,13 +55,14 @@ namespace Lms.api.Controllers
              // return NotFound();
           
             //var course = await _context.Course.FindAsync(id);
-            var course = uow.CourseRepository.GetCourse(id);
+            var course = await uow.CourseRepository.GetCourse(id);
             if (course == null)
             {
                 return NotFound();
             }
+         var  courseDto= mapper.Map<CourseDto>(course);
 
-            return await course;
+            return Ok (courseDto);
         }
 
         // PUT: api/Courses/5
