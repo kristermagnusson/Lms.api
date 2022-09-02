@@ -10,6 +10,7 @@ using Lms.Data.Data;
 using Lms.Data.Data.Repositories;
 using Lms.Core.Repositories;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using AutoMapper;
 
 namespace Lms.api.Controllers
 {
@@ -19,7 +20,7 @@ namespace Lms.api.Controllers
     {
        // private readonly LmsapiContext _context;
         private readonly IUnitOfWork uow;
-        public CoursesController(/*LmsapiContext context*/ IUnitOfWork uow)
+        public CoursesController(/*LmsapiContext context*/ IUnitOfWork uow, IMapper mapper)
         {
            // _context = context;
             this.uow = uow;
