@@ -40,6 +40,7 @@ namespace Lms.api.Controllers
             //}
             //return await _context.Course.ToListAsync();
             var course =  await uow.CourseRepository.GetAllCourses();
+            if (course==null) return NotFound();
             var courseDto=mapper.Map<IEnumerable<CourseDto>>(course);
             return Ok (courseDto);
 
@@ -107,7 +108,8 @@ namespace Lms.api.Controllers
             if (uow.CourseRepository == null)
             {
               return Problem("Entity set 'LmsapiContext.Course'  is null.");
-          }
+            }
+            if (courseDto == null) return BadRequest();
             //_context.Course.Add(course);
             var course=mapper.Map<Course>(courseDto);
             uow.CourseRepository.Add(course);

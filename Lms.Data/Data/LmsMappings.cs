@@ -18,8 +18,9 @@ namespace Lms.Data.Data
 
 
 
-        CreateMap<Course, CourseDto>().ReverseMap(); ;
-        CreateMap<Module, ModuleDto>().ReverseMap(); ;
+        CreateMap<Course, CourseDto>().ReverseMap(); 
+        CreateMap<Module, ModuleDto>().ReverseMap();
+        CreateMap<Module, ModulePostDto>().ReverseMap();
         }
     }
 }

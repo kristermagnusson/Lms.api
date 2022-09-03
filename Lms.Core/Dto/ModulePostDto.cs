@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 
 namespace Lms.Core.Dto
 {
-    public class ModuleDto
+    public class ModulePostDto
     {
         [MaxLength(50)]
         [Required]
         public string Title { get; set; }
         public DateTime StartDate { get; set; }
-        public DateTime EndDate  => StartDate.AddMonths(1);
+        public DateTime EndDate => StartDate.AddMonths(1);
+        public int CourseId { get; set; }
     }
 }

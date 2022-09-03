@@ -38,6 +38,7 @@ namespace Lms.api.Controllers
             //}
             // return await _context.Module.ToListAsync();
             var module = await uow.ModuleRepository.GetAllModules();
+            if (module ==null) return NotFound();
             var moduleDto= mapper.Map<IEnumerable<ModuleDto>>(module);
             return Ok(moduleDto);
 
@@ -96,7 +97,7 @@ namespace Lms.api.Controllers
         // POST: api/Modules
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Module>> PostModule(Module @module)
+        public async Task<ActionResult<Module>> PostModule(ModulePostDto modulePostDto)
         {
             // if (_context.Module == null)
             if (uow.CourseRepository == null)
@@ -104,10 +105,11 @@ namespace Lms.api.Controllers
               return Problem("Entity set 'LmsapiContext.Module'  is null.");
           }
             //_context.Module.Add(@module);
+            var module=mapper.Map<Module>(modulePostDto);
             uow.ModuleRepository.Add(module);
             //await _context.SaveChangesAsync();
             await uow.CompleteAsync();
-            return CreatedAtAction("GetModule", new { id = @module.Id }, @module);
+            return CreatedAtAction("GetModule", new { id = module.Id }, modulePostDto);
         }
 
         // DELETE: api/Modules/5

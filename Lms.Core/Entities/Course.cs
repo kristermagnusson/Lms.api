@@ -12,6 +12,7 @@ namespace Lms.Core.Entities
     {
         public int Id { get; set; }
         [MaxLength(50)]
+        [Required]
         public string Title { get; set; }
         public DateTime StartDate { get; set; }
         public ICollection<Module> Modules { get; set; }=new List<Module>();

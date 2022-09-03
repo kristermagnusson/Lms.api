@@ -11,6 +11,7 @@ namespace Lms.Core.Entities
     {
         public int Id { get; set; }
         [MaxLength(50)]
+        [Required]
         public string Title { get; set; }
         public DateTime StartDate { get; set; }
         public int CourseId { get; set; }
