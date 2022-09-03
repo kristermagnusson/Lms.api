@@ -1,4 +1,5 @@
-﻿using Lms.Core.Entities;
+﻿using Bogus.DataSets;
+using Lms.Core.Entities;
 using Lms.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -27,19 +28,30 @@ namespace Lms.Data.Data.Repositories
             return (db.Module?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
-        public Task<Module> FindAsync(int? id)
+        public async Task<Module> FindAsync(int? id)
         {
-            throw new NotImplementedException();
+            var module = await db.Module.FindAsync(id);
+            return module;
         }
+    
 
         public async Task<IEnumerable<Module>> GetAllModules()
         {
             return await db.Module.ToListAsync();
+            
         }
+        //public async Task<Module> GetModules(int? id) 
+        //{
+        //  var  module= await db.Module.FindAsync(id);
+        //    return module;
+        //}
 
-        public async Task<Module> GetModules(int? id)
+
+        public async Task<Module> GetModules(string title)
+            
         {
-            return await db.Module.FindAsync(id);
+            var module =  db.Module.FirstOrDefault(l => l.Title == title);
+            return module;
         }
 
         public void Remove(Module module)

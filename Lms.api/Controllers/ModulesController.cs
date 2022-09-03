@@ -46,14 +46,14 @@ namespace Lms.api.Controllers
         }
 
         // GET: api/Modules/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Module>> GetModule(int id)
+        [HttpGet("{title}")]
+        public async Task<ActionResult<Module>> GetModule(string title)
         {
          // if (_context.Module == null)
           //{
              // return NotFound();
          // }
-            var @module = await uow.ModuleRepository.GetModules(id);
+            var @module = await uow.ModuleRepository.GetModules(title);
 
             if (@module == null)
             {
@@ -123,8 +123,8 @@ namespace Lms.api.Controllers
                 return NotFound();
             }
            // var @module = await _context.Module.FindAsync(id);
-           var @module=await uow.ModuleRepository.GetModules(id);
-            if (@module == null)
+           var module=await uow.ModuleRepository.FindAsync(id);
+            if (module == null)
             {
                 return NotFound();
             }
@@ -145,7 +145,7 @@ namespace Lms.api.Controllers
         [HttpPatch("{modulesId}")]
         public async Task<ActionResult<ModuleDto>> PatchCourse(int moduleId, JsonPatchDocument<ModuleDto> patchDocument)
         {
-            var module = await uow.ModuleRepository.GetModules(moduleId);
+            var module = await uow.ModuleRepository.AnyAsync(moduleId);
             if (module == null) return NotFound();
             var moduleDto = mapper.Map<ModuleDto>(module);
             patchDocument.ApplyTo(moduleDto, ModelState);

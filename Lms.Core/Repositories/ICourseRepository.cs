@@ -9,7 +9,7 @@ namespace Lms.Core.Repositories
 {
     public interface ICourseRepository
     {
-        Task<IEnumerable<Course>> GetAllCourses();
+        Task<IEnumerable<Course>> GetAllCourses(bool include);
 
         Task<Course> GetCourse(int? id);
 

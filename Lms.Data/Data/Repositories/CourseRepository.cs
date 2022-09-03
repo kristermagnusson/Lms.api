@@ -32,9 +32,15 @@ namespace Lms.Data.Data.Repositories
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<Course>> GetAllCourses()
+        public async Task<IEnumerable<Course>> GetAllCourses(bool include)           
         {
-            return await db.Course.ToListAsync();
+            //if (include) 
+            //{ 
+            return await db.Course
+                    .Include(c=>c.Modules)
+                    .ToListAsync();
+            //}
+            //return await db.Course.ToListAsync();
         }
 
         public async Task<Course?> GetCourse(int? id)
