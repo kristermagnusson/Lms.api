@@ -56,6 +56,8 @@ namespace Lms.Data.Data
             }
             db.AddRange(courses);
             await db.SaveChangesAsync();
+
+           
         }
     }
 

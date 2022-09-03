@@ -101,7 +101,7 @@ namespace Lms.api.Controllers
         // POST: api/Courses
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Course>> PostCourse(Course course)
+        public async Task<ActionResult<Course>> PostCourse(CourseDto courseDto)
         {
             //if (_context.Course == null)
             if (uow.CourseRepository == null)
@@ -109,10 +109,11 @@ namespace Lms.api.Controllers
               return Problem("Entity set 'LmsapiContext.Course'  is null.");
           }
             //_context.Course.Add(course);
+            var course=mapper.Map<Course>(courseDto);
             uow.CourseRepository.Add(course);
             //await _context.SaveChangesAsync();
             await uow.CompleteAsync();
-            return CreatedAtAction("GetCourse", new { id = course.Id }, course);
+            return CreatedAtAction("GetCourse", new { id = course.Id }, courseDto);
         }
 
         // DELETE: api/Courses/5

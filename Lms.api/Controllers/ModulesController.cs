@@ -15,8 +15,6 @@ using Lms.Core.Repositories;
 namespace Lms.api.Controllers
 {
      [Route("api/[controller]")]
-   
-
     [ApiController]
     public class ModulesController : ControllerBase
     {
