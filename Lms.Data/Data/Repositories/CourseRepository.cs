@@ -34,13 +34,13 @@ namespace Lms.Data.Data.Repositories
 
         public async Task<IEnumerable<Course>> GetAllCourses(bool include)           
         {
-            //if (include) 
-            //{ 
-            return await db.Course
+            if (include)
+            {
+                return await db.Course
                     .Include(c=>c.Modules)
                     .ToListAsync();
-            //}
-            //return await db.Course.ToListAsync();
+            }
+            return await db.Course.ToListAsync();
         }
 
         public async Task<Course?> GetCourse(int? id)
