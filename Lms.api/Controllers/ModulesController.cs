@@ -11,6 +11,7 @@ using Lms.Data.Data.Repositories;
 using AutoMapper;
 using Lms.Core.Dto;
 using Lms.Core.Repositories;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace Lms.api.Controllers
 {
@@ -140,5 +141,21 @@ namespace Lms.api.Controllers
             return await uow.ModuleRepository.AnyAsync(id);
             //return (_context.Module?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
+        [HttpPatch("{modulesId}")]
+        public async Task<ActionResult<ModuleDto>> PatchCourse(int moduleId, JsonPatchDocument<ModuleDto> patchDocument)
+        {
+            var module = await uow.ModuleRepository.GetModules(moduleId);
+            if (module == null) return NotFound();
+            var moduleDto = mapper.Map<ModuleDto>(module);
+            patchDocument.ApplyTo(moduleDto, ModelState);
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            mapper.Map(moduleDto, module);
+            await uow.CompleteAsync();
+            return Ok(mapper.Map<ModuleDto>(module));
+        }
+
+
+
     }
 }
