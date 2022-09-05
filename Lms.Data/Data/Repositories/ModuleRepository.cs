@@ -50,7 +50,7 @@ namespace Lms.Data.Data.Repositories
         public async Task<Module> GetModules(string title)
             
         {
-            var module =  db.Module.FirstOrDefault(l => l.Title == title);
+            var module =   db.Module.FirstOrDefault(l => l.Title == title);
             return module;
         }
 

@@ -23,7 +23,7 @@ namespace Lms.Data.Data
             var faker = new Faker();
             var courses = new List<Course>();
 
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < 20; i++)
             {
                 courses.Add(new Course
                 {
